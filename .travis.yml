@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "6"
+
+deploy:
+  provider: npm
+  email: tewson.seeoun@gmail.com
+  api_key:
+    secure: Rjnma7DOejeBLeVtVlYMM0QpFx9cZbOihPR2sja1KT7na+UNEj8qYJbSrnI5tVFKEsxu+BJUkFrQsxXC5U6kXyxLigCFqvmO57ftbme5ra11/kYHEpDgDZfaLEW1Dmvfz98c0pcuJf2uZTySWS9sJ0jtcAPlEMYMJuHtcYCJKnR3Yosavf44/r50a2svHLxV+sKeuGdxCSlxdxM7mHDCW7CQxbXkOcxdH2K0xgALIofPPTOXFVBCGmZQ1cLsBpIEb4KTzTBMqw3jwhxB8pjFO63oQeJ9YuATuH0qSEuJloBunOP4nt6YZGSFS8swlM2mlg2gJqnMtfjFVJO1XY15I8VFXlX06DkmC90FnoK49CNqPk8iOaIvE4ILU+4nXBYesRDWF+Mde5tCNgU5FV+AXN9iDpW5foBDCGbicylTyDqd0ZfeiAq1FJLtGc7YE+8lgJya3lOn0f5BOjbY/eA0+DpDbI2vFA4lyIDrJgmC+X5k21c6EChj+abDNtGr0ctDh6m/WTwuDNVq/ruXZM1N2UDgOx1aP0BZ6WjQINbQtmqB3QjC4EZGJ9E58wbxC7465LBr0sC/vgsbt69gRy4sWfbonVkO8AfzkQ31E/9C158nDkPrK8lowoOM4p0/K3PUwIrc1pEMegVRqFlMJkoXPizYObnoPCL3dflXv6EzA+Q=
+  on:
+    tags: true
+    repo: tewson/ng-sizer
