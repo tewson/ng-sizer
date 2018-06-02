@@ -14,6 +14,12 @@ const angular = global.window.angular;
 
 const ngSizer = require('../dist/ng-sizer');
 
+function generateRandomNumber() {
+
+  return Math.floor(Math.random() * 100);
+
+}
+
 describe('ngSizer', function () {
 
   this.stubbedConsoleInfo = sinon.stub(global.console, 'info');
@@ -22,20 +28,34 @@ describe('ngSizer', function () {
 
     this.testModule = angular.module('test', []);
 
-    this.randomControllerCount = Math.floor(Math.random() * 100);
+    this.randomControllerCount = generateRandomNumber();
 
-    for (var i = 0; i < this.randomControllerCount; i++) {
+    let i;
+
+    for (i = 0; i < this.randomControllerCount; i++) {
 
       this.testModule.controller(`Controller${i}`, function () {});
 
     }
 
+    this.randomServiceCount = generateRandomNumber();
+
+    for (i = 0; i < this.randomServiceCount; i++) {
+
+      this.testModule.service(`service${i}`, function () {});
+
+    }
+
   });
 
-  it('should log controller count', () => {
+  it('should log controller and service count', () => {
 
     ngSizer(this.testModule);
-    assert(this.stubbedConsoleInfo.calledWith(`Controller count: ${this.randomControllerCount}`));
+
+    const consoleLogMessage = this.stubbedConsoleInfo.getCall(0).args[0];
+
+    assert(consoleLogMessage.includes(`Controller count: ${this.randomControllerCount}`));
+    assert(consoleLogMessage.includes(`Service count: ${this.randomServiceCount}`));
 
   });
 
