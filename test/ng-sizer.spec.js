@@ -38,19 +38,35 @@ describe('ngSizer', function () {
 
     }
 
-    this.randomServiceCount = generateRandomNumber();
-
-    for (i = 0; i < this.randomServiceCount; i++) {
-
-      this.testModule.service(`service${i}`, function () {});
-
-    }
-
     this.randomDirectiveCount = generateRandomNumber();
 
     for (i = 0; i < this.randomDirectiveCount; i++) {
 
       this.testModule.directive(`directive${i}`, function () {});
+
+    }
+
+    this.randomFactoryCount = generateRandomNumber();
+
+    for (i = 0; i < this.randomFactoryCount; i++) {
+
+      this.testModule.factory(`factory${i}`, function () {});
+
+    }
+
+    this.randomProviderCount = generateRandomNumber();
+
+    for (i = 0; i < this.randomProviderCount; i++) {
+
+      this.testModule.provider(`provider${i}`, function () {});
+
+    }
+
+    this.randomServiceCount = generateRandomNumber();
+
+    for (i = 0; i < this.randomServiceCount; i++) {
+
+      this.testModule.service(`service${i}`, function () {});
 
     }
 
@@ -62,7 +78,7 @@ describe('ngSizer', function () {
 
   });
 
-  it('should log counts for controllers, services and directives', () => {
+  it('should log counts for controllers, directives, factories, providers and services', () => {
 
     ngSizer(this.testModule);
 
@@ -70,6 +86,8 @@ describe('ngSizer', function () {
 
     assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount}`));
     assert(consoleInfoMessage.includes(`Directive count: ${this.randomDirectiveCount}`));
+    assert(consoleInfoMessage.includes(`Factory count: ${this.randomFactoryCount}`));
+    assert(consoleInfoMessage.includes(`Provider count: ${this.randomProviderCount}`));
     assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount}`));
 
   });
