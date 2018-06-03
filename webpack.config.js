@@ -5,13 +5,13 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
   output: {
     filename: 'ng-sizer.js',
     library: 'ngSizer',
-    libraryTarget: 'umd'
-  }
+    libraryTarget: 'umd',
+  },
 };

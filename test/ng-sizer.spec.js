@@ -90,6 +90,6 @@ describe('ngSizer', function () {
     assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount + 1}`));
     assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount + 1}`));
 
-  })
+  });
 
 });

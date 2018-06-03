@@ -57,7 +57,7 @@ module.exports = function (appModule) {
   const {
     controllerCount,
     directiveCount,
-    serviceCount
+    serviceCount,
   } = moduleSize(appModule);
 
   console.info(`
@@ -66,4 +66,4 @@ module.exports = function (appModule) {
     Service count: ${serviceCount}
   `);
 
-}
+};
