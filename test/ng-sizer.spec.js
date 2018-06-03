@@ -48,6 +48,12 @@ describe('ngSizer', function () {
 
   });
 
+  afterEach(() => {
+
+    this.stubbedConsoleInfo.reset();
+
+  });
+
   it('should log controller and service count', () => {
 
     ngSizer(this.testModule);
@@ -58,5 +64,22 @@ describe('ngSizer', function () {
     assert(consoleLogMessage.includes(`Service count: ${this.randomServiceCount}`));
 
   });
+
+  it('should work for module hierarchy', () => {
+
+    angular.module('sibling', [])
+      .service('siblingService', function () {});
+
+    const parentModule = angular
+      .module('parent', ['sibling', 'test'])
+      .controller('ParentCtrl', function () {});
+
+    ngSizer(parentModule);
+
+    const consoleLogMessage = this.stubbedConsoleInfo.getCall(0).args[0];
+    assert(consoleLogMessage.includes(`Controller count: ${this.randomControllerCount + 1}`));
+    assert(consoleLogMessage.includes(`Service count: ${this.randomServiceCount + 1}`));
+
+  })
 
 })
