@@ -14,11 +14,13 @@ function moduleSize(m) {
 
       return {
         controllerCount: combined.controllerCount + eachModuleSize.controllerCount,
+        directiveCount: combined.directiveCount + eachModuleSize.directiveCount,
         serviceCount: combined.serviceCount + eachModuleSize.serviceCount,
       };
 
     }, {
       controllerCount: 0,
+      directiveCount: 0,
       serviceCount: 0,
     });
 
@@ -27,6 +29,13 @@ function moduleSize(m) {
   const controllerCount = invokeQueue
     .filter(([ provider ]) => provider === '$controllerProvider')
     .length;
+
+  const directiveCount = invokeQueue
+    .filter(([ provider, method ]) => {
+
+      return provider === '$compileProvider' && method === 'directive';
+
+    }).length;
 
   const serviceCount = invokeQueue
     .filter(([ provider, method ]) => {
@@ -37,6 +46,7 @@ function moduleSize(m) {
 
   return {
     controllerCount: controllerCount + childrenSize.controllerCount,
+    directiveCount: directiveCount + childrenSize.directiveCount,
     serviceCount: serviceCount + childrenSize.serviceCount,
   };
 
@@ -46,11 +56,13 @@ module.exports = function (appModule) {
 
   const {
     controllerCount,
+    directiveCount,
     serviceCount
   } = moduleSize(appModule);
 
   console.info(`
     Controller count: ${controllerCount}
+    Directive count: ${directiveCount}
     Service count: ${serviceCount}
   `);
 

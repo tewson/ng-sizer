@@ -46,6 +46,14 @@ describe('ngSizer', function () {
 
     }
 
+    this.randomDirectiveCount = generateRandomNumber();
+
+    for (i = 0; i < this.randomDirectiveCount; i++) {
+
+      this.testModule.directive(`directive${i}`, function () {});
+
+    }
+
   });
 
   afterEach(() => {
@@ -54,13 +62,14 @@ describe('ngSizer', function () {
 
   });
 
-  it('should log controller and service count', () => {
+  it('should log counts for controllers, services and directives', () => {
 
     ngSizer(this.testModule);
 
     const consoleInfoMessage = this.stubbedConsoleInfo.getCall(0).args[0];
 
     assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount}`));
+    assert(consoleInfoMessage.includes(`Directive count: ${this.randomDirectiveCount}`));
     assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount}`));
 
   });
@@ -83,4 +92,4 @@ describe('ngSizer', function () {
 
   })
 
-})
+});
