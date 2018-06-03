@@ -58,10 +58,10 @@ describe('ngSizer', function () {
 
     ngSizer(this.testModule);
 
-    const consoleLogMessage = this.stubbedConsoleInfo.getCall(0).args[0];
+    const consoleInfoMessage = this.stubbedConsoleInfo.getCall(0).args[0];
 
-    assert(consoleLogMessage.includes(`Controller count: ${this.randomControllerCount}`));
-    assert(consoleLogMessage.includes(`Service count: ${this.randomServiceCount}`));
+    assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount}`));
+    assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount}`));
 
   });
 
@@ -76,9 +76,10 @@ describe('ngSizer', function () {
 
     ngSizer(parentModule);
 
-    const consoleLogMessage = this.stubbedConsoleInfo.getCall(0).args[0];
-    assert(consoleLogMessage.includes(`Controller count: ${this.randomControllerCount + 1}`));
-    assert(consoleLogMessage.includes(`Service count: ${this.randomServiceCount + 1}`));
+    const consoleInfoMessage = this.stubbedConsoleInfo.getCall(0).args[0];
+
+    assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount + 1}`));
+    assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount + 1}`));
 
   })
 
