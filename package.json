@@ -1,6 +1,6 @@
 {
   "name": "ng-sizer",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Measure the size of your AngularJS module.",
   "main": "./dist/ng-sizer.js",
   "scripts": {
