@@ -9,7 +9,7 @@
     "build": "npm run clean && webpack",
     "test": "npm run build && mocha",
     "precommit": "npm run lint && npm test",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test"
   },
   "repository": {
     "type": "git",
