@@ -2,12 +2,12 @@
 
 const angular = window.angular;
 
-function moduleSize(m) {
+function ngSizer(m) {
 
   const childrenSize = m.requires
     .map((moduleName) => {
 
-      return moduleSize(angular.module(moduleName));
+      return ngSizer(angular.module(moduleName));
 
     })
     .reduce((combined, eachModuleSize) => {
@@ -72,22 +72,4 @@ function moduleSize(m) {
 
 }
 
-module.exports = function (appModule) {
-
-  const {
-    controllerCount,
-    directiveCount,
-    factoryCount,
-    providerCount,
-    serviceCount,
-  } = moduleSize(appModule);
-
-  console.info(`
-    Controller count: ${controllerCount}
-    Directive count: ${directiveCount}
-    Factory count: ${factoryCount}
-    Provider count: ${providerCount}
-    Service count: ${serviceCount}
-  `);
-
-};
+module.exports = ngSizer;

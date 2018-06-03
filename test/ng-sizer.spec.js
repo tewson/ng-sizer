@@ -2,7 +2,6 @@
 
 const assert = require('assert');
 const jsdom = require('jsdom');
-const sinon = require('sinon');
 
 global.window = new jsdom.JSDOM('<html></html>').window;
 global.document = global.window.document;
@@ -21,8 +20,6 @@ function generateRandomNumber() {
 }
 
 describe('ngSizer', function () {
-
-  this.stubbedConsoleInfo = sinon.stub(global.console, 'info');
 
   beforeEach(() => {
 
@@ -72,23 +69,15 @@ describe('ngSizer', function () {
 
   });
 
-  afterEach(() => {
+  it('should return counts for controllers, directives, factories, providers and services', () => {
 
-    this.stubbedConsoleInfo.reset();
+    const moduleSize = ngSizer(this.testModule);
 
-  });
-
-  it('should log counts for controllers, directives, factories, providers and services', () => {
-
-    ngSizer(this.testModule);
-
-    const consoleInfoMessage = this.stubbedConsoleInfo.getCall(0).args[0];
-
-    assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount}`));
-    assert(consoleInfoMessage.includes(`Directive count: ${this.randomDirectiveCount}`));
-    assert(consoleInfoMessage.includes(`Factory count: ${this.randomFactoryCount}`));
-    assert(consoleInfoMessage.includes(`Provider count: ${this.randomProviderCount}`));
-    assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount}`));
+    assert.equal(moduleSize.controllerCount, this.randomControllerCount);
+    assert.equal(moduleSize.directiveCount, this.randomDirectiveCount);
+    assert.equal(moduleSize.factoryCount, this.randomFactoryCount);
+    assert.equal(moduleSize.providerCount, this.randomProviderCount);
+    assert.equal(moduleSize.serviceCount, this.randomServiceCount);
 
   });
 
@@ -101,12 +90,10 @@ describe('ngSizer', function () {
       .module('parent', ['sibling', 'test'])
       .controller('ParentCtrl', function () {});
 
-    ngSizer(parentModule);
+    const parentModuleSize = ngSizer(parentModule);
 
-    const consoleInfoMessage = this.stubbedConsoleInfo.getCall(0).args[0];
-
-    assert(consoleInfoMessage.includes(`Controller count: ${this.randomControllerCount + 1}`));
-    assert(consoleInfoMessage.includes(`Service count: ${this.randomServiceCount + 1}`));
+    assert.equal(parentModuleSize.controllerCount, this.randomControllerCount + 1);
+    assert.equal(parentModuleSize.serviceCount, this.randomServiceCount + 1);
 
   });
 

@@ -15,12 +15,17 @@ import ngSizer from 'ng-sizer';
 const app = angular.module('app', []);
 
 app.controller('HomeCtrl', function () { ... });
+app.service('apiService', function () { ... });
 
-ngSizer(app);
 /*
- * Will log the following to the console:
+ * Will log the following object to the console:
  *
- * Controller count: 1
+ * {
+ *   controllerCount: 1,
+ *   serviceCount: 1
+ * }
  *
  */
+console.log(ngSizer(app));
+
 ```
